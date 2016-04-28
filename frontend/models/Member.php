@@ -5,9 +5,8 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "{{%member}}".
+ * This is the model class for table "member".
  *
- * @property integer $id
  * @property integer $club_id
  * @property integer $user_id
  * @property string $role
@@ -17,6 +16,7 @@ use Yii;
  *
  * @property Club $club
  * @property User $user
+ * @property UserSetting[] $userSettings
  */
 class Member extends \yii\db\ActiveRecord
 {
@@ -25,7 +25,7 @@ class Member extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return '{{%member}}';
+        return 'member';
     }
 
     /**
@@ -49,7 +49,6 @@ class Member extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
             'club_id' => 'Club ID',
             'user_id' => 'User ID',
             'role' => 'Role',
@@ -73,5 +72,13 @@ class Member extends \yii\db\ActiveRecord
     public function getUser()
     {
         return $this->hasOne(User::className(), ['id' => 'user_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUserSettings()
+    {
+        return $this->hasMany(UserSetting::className(), ['user_id' => 'user_id']);
     }
 }

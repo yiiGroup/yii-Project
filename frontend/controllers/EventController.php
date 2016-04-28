@@ -2,9 +2,12 @@
 
 namespace frontend\controllers;
 
+use app\models\Place;
 use Yii;
 use app\models\Event;
 use frontend\models\EventSearch;
+use yii\db\ActiveRecord;
+use yii\db\Expression;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -23,8 +26,28 @@ class EventController extends Controller
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'delete' => ['POST'],
+                    'delete' => ['post'],
                 ],
+            ],
+            'access' => [
+                'class' => \yii\filters\AccessControl::className(),
+                'only' => ['index','create','update','view','slug'],
+                'rules' => [
+                    // allow authenticated users
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                    // everything else is denied
+                ],
+            ],
+            'timestamp' => [
+                'class' => 'yii\behaviors\TimestampBehavior',
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => ['created_at', 'updated_at'],
+                    ActiveRecord::EVENT_BEFORE_UPDATE => ['updated_at'],
+                ],
+                'value' => new Expression('NOW()'),
             ],
         ];
     }
@@ -51,9 +74,14 @@ class EventController extends Controller
      */
     public function actionView($id)
     {
+        $eve = $this->findModel($id);
+        $model=new Place();
+        $gps = $model->getLocation($eve->eventPlace->id);
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $eve,
+            'gps'=> $gps,
         ]);
+
     }
 
     /**
@@ -65,7 +93,9 @@ class EventController extends Controller
     {
         $model = new Event();
 
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
@@ -120,5 +150,18 @@ class EventController extends Controller
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+
+    public function actionPlace($id)
+    {
+
+        $model=new Place();
+        $gps = $model->getLocation($id);
+        return $this->render('/place/view', [
+            'model' => $model,
+            'gps'=> $gps,
+        ]);
+
+
     }
 }

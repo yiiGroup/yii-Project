@@ -18,7 +18,7 @@ class MemberSearch extends Member
     public function rules()
     {
         return [
-            [['id', 'club_id', 'user_id'], 'integer'],
+            [['club_id', 'user_id'], 'integer'],
             [['role', 'date_join_club', 'created_at', 'updated_at'], 'safe'],
         ];
     }
@@ -59,7 +59,6 @@ class MemberSearch extends Member
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'id' => $this->id,
             'club_id' => $this->club_id,
             'user_id' => $this->user_id,
             'date_join_club' => $this->date_join_club,

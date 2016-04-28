@@ -2,12 +2,20 @@
 
 namespace frontend\controllers;
 
+use app\models\Event;
+use app\models\Member;
+use frontend\models\EventSearch;
 use Yii;
 use app\models\Club;
 use frontend\models\ClubSearch;
+use yii\data\ArrayDataProvider;
+use yii\db\Query;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\db\Expression;
+use yii\db\ActiveRecord;
+use yii\data\ActiveDataProvider;
 
 /**
  * ClubController implements the CRUD actions for Club model.
@@ -23,9 +31,30 @@ class ClubController extends Controller
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'delete' => ['POST'],
+                    'delete' => ['post'],
                 ],
             ],
+            'access' => [
+                'class' => \yii\filters\AccessControl::className(),
+                'only' => ['index','create','update','view','slug'],
+                'rules' => [
+                    // allow authenticated users
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                    // everything else is denied
+                ],
+            ],
+            'timestamp' => [
+                'class' => 'yii\behaviors\TimestampBehavior',
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => ['created_at', 'updated_at'],
+                    ActiveRecord::EVENT_BEFORE_UPDATE => ['updated_at'],
+                ],
+                'value' => new Expression('NOW()'),
+            ],
+
         ];
     }
 
@@ -50,9 +79,20 @@ class ClubController extends Controller
      * @return mixed
      */
     public function actionView($id)
+
     {
+
+        $dataProvider = new ArrayDataProvider([
+            'allModels' =>
+                Event::find()
+                    ->where(['club_id' => $id])
+                    ->All()
+        ]);
+
+
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'dataProvider' => $dataProvider,
         ]);
     }
 
@@ -120,5 +160,39 @@ class ClubController extends Controller
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+
+    public function actionJoin($id)
+    {
+
+        $model = new Member();
+
+            $model->club_id=$id;
+            $model->user_id= Yii::$app->user->getId();
+            $model->role='simple member';
+            $model->date_join_club= new Expression('NOW()');
+            $model->save();
+        return $this->redirect(['/member/view', 'club_id' => $model->club_id,'user_id'=>$model->user_id]);
+
+    }
+
+    public function actionMember($id)
+
+    {
+        $searchModel = new ClubSearch();
+        $dataProvider = new ArrayDataProvider([
+            'allModels' =>
+                Member::find()
+                    ->where(['club_id' => $id])
+                    ->All()
+        ]);
+
+
+        return $this->render('/member/index', [
+            'dataProvider' => $dataProvider,
+            'searchModel' => $searchModel,
+        ]);
+
+
     }
 }

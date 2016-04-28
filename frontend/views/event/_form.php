@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\jui\DatePicker;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Event */
@@ -12,13 +13,19 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
+    <?= $form->field($model, 'name')->textInput() ?>
+
     <?= $form->field($model, 'club_id')->textInput() ?>
 
-    <?= $form->field($model, 'event_type')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'event_type')
+        ->dropDownList(
+            $model->getEventTypeOptions(),
+            ['prompt'=>'What type of event is this?']
+        )->label('Type of Place') ?>
 
     <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'date')->textInput() ?>
+    <?= $form->field($model,'date')->widget(DatePicker::className(),['dateFormat' => 'yyyy-MM-dd']) ?>
 
     <?= $form->field($model, 'event_place')->textInput() ?>
 

@@ -5,26 +5,47 @@ namespace frontend\controllers;
 use Yii;
 use app\models\Place;
 use frontend\models\PlaceSearch;
+use yii\db\ActiveRecord;
+use yii\db\Expression;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\User;
+use dosamigos\google\maps\services\GeocodingClient;
 
 /**
  * PlaceController implements the CRUD actions for Place model.
  */
 class PlaceController extends Controller
 {
-    /**
-     * @inheritdoc
-     */
     public function behaviors()
     {
         return [
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'delete' => ['POST'],
+                    'delete' => ['post'],
                 ],
+            ],
+            'access' => [
+                'class' => \yii\filters\AccessControl::className(),
+                'only' => ['index','create', 'create_geo','create_place_google','update','view','slug'],
+                'rules' => [
+                    // allow authenticated users
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                    // everything else is denied
+                ],
+            ],
+            'timestamp' => [
+                'class' => 'yii\behaviors\TimestampBehavior',
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => ['created_at', 'updated_at'],
+                    ActiveRecord::EVENT_BEFORE_UPDATE => ['updated_at'],
+                ],
+                'value' => new Expression('NOW()'),
             ],
         ];
     }
@@ -51,8 +72,11 @@ class PlaceController extends Controller
      */
     public function actionView($id)
     {
+        $model = $this->findModel($id);
+        $gps = $model->getLocation($id);
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $model,
+            'gps'=> $gps,
         ]);
     }
 
@@ -65,7 +89,14 @@ class PlaceController extends Controller
     {
         $model = new Place();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+
+
+            if (!is_numeric($model->place_type)) {
+                $model->place_type=Place::TYPE_OTHER;
+            }
+            $model->created_by= Yii::$app->user->getId();
+            $model->save();
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
@@ -121,4 +152,32 @@ class PlaceController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
+
+    /**
+     * Creates a new Place model via Geolocation
+     */
+    public function actionCreate_geo()
+    {
+        $model = new Place();
+        if ($model->load(Yii::$app->request->post())) {
+            if (Yii::$app->user->getIsGuest()) {
+                $model->created_by = 1;
+            } else {
+                $model->created_by= Yii::$app->user->getId();
+            }
+            $form = Yii::$app->request->post();
+            $model->save();
+            // add GPS entry in PlaceGeometry
+            $model->addGeometryByPoint($model,$form['Place']['lat'],$form['Place']['lng']);
+            return $this->redirect(['view', 'id' => $model->id]);
+        } else {
+            return $this->render('create_geo', [
+                'model' => $model,
+            ]);
+        }
+    }
+
+
+
 }
