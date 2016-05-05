@@ -38,7 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
     ]) ?>
     <h1>Events</h1>
     <p>
-        <?= Html::a('Add Event', ['event/createEv'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Add Event', ['event/create'], ['class' => 'btn btn-success']) ?>
     </p>
     <?=  \yii\grid\GridView::widget([
         'dataProvider' => $dataProvider,
