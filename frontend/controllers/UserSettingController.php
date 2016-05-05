@@ -3,7 +3,7 @@
 namespace frontend\controllers;
 
 use Yii;
-use app\models\UserSetting;
+use frontend\models\UserSetting;
 use frontend\models\UserSettingSearch;
 use yii\imagine\Image;
 use yii\web\Controller;

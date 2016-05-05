@@ -5,7 +5,7 @@ namespace backend\models;
 use Yii;
 
 /**
- * This is the model class for table "{{%user}}".
+ * This is the model class for table "user".
  *
  * @property integer $id
  * @property string $username
@@ -16,8 +16,9 @@ use Yii;
  * @property integer $status
  * @property integer $created_at
  * @property integer $updated_at
- *
- * @property Member[] $members
+ * @property string $image
+ * @property string $role
+ * @property string $matricule
  */
 class User extends \yii\db\ActiveRecord
 {
@@ -26,7 +27,7 @@ class User extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return '{{%user}}';
+        return 'user';
     }
 
     /**
@@ -35,13 +36,16 @@ class User extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['username', 'auth_key', 'password_hash', 'email', 'created_at', 'updated_at'], 'required'],
+            [['username', 'auth_key', 'password_hash', 'email', 'created_at', 'updated_at', 'image', 'role', 'matricule'], 'required'],
             [['status', 'created_at', 'updated_at'], 'integer'],
             [['username', 'password_hash', 'password_reset_token', 'email'], 'string', 'max' => 255],
             [['auth_key'], 'string', 'max' => 32],
+            [['image'], 'string', 'max' => 100],
+            [['role'], 'string', 'max' => 30],
+            [['matricule'], 'string', 'max' => 20],
             [['username'], 'unique'],
             [['email'], 'unique'],
-            [['password_reset_token'], 'unique'],
+            [['password_reset_token'], 'unique']
         ];
     }
 
@@ -60,14 +64,9 @@ class User extends \yii\db\ActiveRecord
             'status' => 'Status',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
+            'image' => 'Image',
+            'role' => 'Role',
+            'matricule' => 'Matricule',
         ];
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getMembers()
-    {
-        return $this->hasMany(Member::className(), ['user_id' => 'id']);
     }
 }

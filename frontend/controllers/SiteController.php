@@ -1,6 +1,10 @@
 <?php
 namespace frontend\controllers;
 
+use frontend\models\EventSearch;
+use frontend\models\NewsSearch;
+use frontend\models\User;
+use frontend\models\UserSearch;
 use Yii;
 use common\models\LoginForm;
 use frontend\models\PasswordResetRequestForm;
@@ -12,6 +16,8 @@ use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use frontend\models\Enseignant;
+use yii\web\NotFoundHttpException;
 
 /**
  * Site controller
@@ -65,14 +71,36 @@ class SiteController extends Controller
         ];
     }
 
+    protected function findModel1($id)
+    {
+        if (($model = Ens_mat::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+
     /**
      * Displays homepage.
      *
      * @return mixed
      */
+
+
+
+
     public function actionIndex()
     {
-        return $this->render('index');
+       $e=new EventSearch();
+       $dataProvider= $e->searchPerMonth();
+$n=new NewsSearch();
+        $dp=$n->searchAll();
+
+return $this->render('index', [
+    'dataProvider' => $dataProvider,
+    'dp' => $dp
+]);
+
     }
 
     /**
@@ -141,11 +169,36 @@ class SiteController extends Controller
         return $this->render('about');
     }
 
+
+    protected function findModel($id)
+    {
+        if (($model = Enseignant::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+
+
+
+
+
+
+
+
+
+
     /**
      * Signs user up.
      *
      * @return mixed
      */
+
+
+
+
+
+
     public function actionSignup()
     {
         $model = new SignupForm();
@@ -210,4 +263,6 @@ class SiteController extends Controller
             'model' => $model,
         ]);
     }
+
+
 }

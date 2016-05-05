@@ -5,7 +5,8 @@ namespace frontend\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Event;
+use frontend\models\Event;
+use  yii\data\SqlDataProvider;
 
 /**
  * EventSearch represents the model behind the search form about `app\models\Event`.
@@ -69,6 +70,25 @@ class EventSearch extends Event
 
         $query->andFilterWhere(['like', 'event_type', $this->event_type])
             ->andFilterWhere(['like', 'description', $this->description]);
+
+        return $dataProvider;
+    }
+
+    public function searchPerMonth()
+    {
+
+        $dataProvider = new SqlDataProvider([
+            'sql' => 'select name,description,date
+                      from event
+                      where MONTH(date)=MONTH(SYSDATE())
+)',
+        ]);
+
+
+
+
+
+
 
         return $dataProvider;
     }

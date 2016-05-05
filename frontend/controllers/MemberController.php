@@ -3,7 +3,7 @@
 namespace frontend\controllers;
 
 use Yii;
-use app\models\Member;
+use frontend\models\Member;
 use frontend\models\MemberSearch;
 use yii\db\ActiveRecord;
 use yii\db\Expression;

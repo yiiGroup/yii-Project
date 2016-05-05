@@ -64,7 +64,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
                 'urlCreator' => function ($action, $model, $key, $index) {
                     if ($action === 'view') {
-                        $url = 'frontend/web/index.php?r=event%2Fview&id=' . $model->id;
+                        $url = 'index.php?r=event%2Fview&id=' . $model->id;
                         return $url;
                     }
                 }

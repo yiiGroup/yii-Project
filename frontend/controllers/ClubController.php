@@ -2,11 +2,11 @@
 
 namespace frontend\controllers;
 
-use app\models\Event;
-use app\models\Member;
+use frontend\models\Event;
+use frontend\models\Member;
 use frontend\models\EventSearch;
 use Yii;
-use app\models\Club;
+use frontend\models\Club;
 use frontend\models\ClubSearch;
 use yii\data\ArrayDataProvider;
 use yii\db\Query;

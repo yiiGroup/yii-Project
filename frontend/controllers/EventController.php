@@ -2,9 +2,9 @@
 
 namespace frontend\controllers;
 
-use app\models\Place;
+use frontend\models\Place;
 use Yii;
-use app\models\Event;
+use frontend\models\Event;
 use frontend\models\EventSearch;
 use yii\db\ActiveRecord;
 use yii\db\Expression;

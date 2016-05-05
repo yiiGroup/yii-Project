@@ -3,7 +3,7 @@
 namespace frontend\controllers;
 
 use Yii;
-use app\models\Place;
+use frontend\models\Place;
 use frontend\models\PlaceSearch;
 use yii\db\ActiveRecord;
 use yii\db\Expression;
