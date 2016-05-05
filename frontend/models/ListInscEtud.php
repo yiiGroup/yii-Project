@@ -8,6 +8,7 @@ use Yii;
  * This is the model class for table "list_insc_etud".
  *
  * @property integer $id
+<<<<<<< HEAD
  * @property string $id_etud
  * @property integer $id_groupe
  * @property integer $id_annee
@@ -15,6 +16,11 @@ use Yii;
  * @property Groupe $idGroupe
  * @property AnneeSco $idAnnee
  * @property Etudiant $idEtud
+=======
+ * @property integer $id_etud
+ * @property integer $id_groupe
+ * @property integer $id_annee
+>>>>>>> a53c17914c92d9e22e0b831cad0d057ae11da966
  */
 class ListInscEtud extends \yii\db\ActiveRecord
 {
@@ -33,8 +39,12 @@ class ListInscEtud extends \yii\db\ActiveRecord
     {
         return [
             [['id_etud', 'id_groupe', 'id_annee'], 'required'],
+<<<<<<< HEAD
             [['id_groupe', 'id_annee'], 'integer'],
             [['id_etud'], 'string', 'max' => 20]
+=======
+            [['id_etud', 'id_groupe', 'id_annee'], 'integer']
+>>>>>>> a53c17914c92d9e22e0b831cad0d057ae11da966
         ];
     }
 
@@ -50,6 +60,7 @@ class ListInscEtud extends \yii\db\ActiveRecord
             'id_annee' => 'Id Annee',
         ];
     }
+<<<<<<< HEAD
 
     /**
      * @return \yii\db\ActiveQuery
@@ -74,4 +85,6 @@ class ListInscEtud extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Etudiant::className(), ['cin' => 'id_etud']);
     }
+=======
+>>>>>>> a53c17914c92d9e22e0b831cad0d057ae11da966
 }

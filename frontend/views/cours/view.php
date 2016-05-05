@@ -30,6 +30,10 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'texte',
+<<<<<<< HEAD
+=======
+            'id_att',
+>>>>>>> a53c17914c92d9e22e0b831cad0d057ae11da966
             'id_ens',
             'id_g',
         ],

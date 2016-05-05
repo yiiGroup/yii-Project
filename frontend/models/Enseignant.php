@@ -13,10 +13,13 @@ use Yii;
  * @property string $num_tel
  * @property string $cin
  * @property string $matricule
+<<<<<<< HEAD
  *
  * @property Cours[] $cours
  * @property EnsMat[] $ensMats
  * @property Seance[] $seances
+=======
+>>>>>>> a53c17914c92d9e22e0b831cad0d057ae11da966
  */
 class Enseignant extends \yii\db\ActiveRecord
 {
@@ -38,7 +41,12 @@ class Enseignant extends \yii\db\ActiveRecord
             [['firstname', 'lastname'], 'string', 'max' => 80],
             [['adress'], 'string', 'max' => 200],
             [['num_tel'], 'string', 'max' => 15],
+<<<<<<< HEAD
             [['cin', 'matricule'], 'string', 'max' => 10]
+=======
+            [['cin'], 'string', 'max' => 10],
+            [['matricule'], 'string', 'max' => 30]
+>>>>>>> a53c17914c92d9e22e0b831cad0d057ae11da966
         ];
     }
 
@@ -56,6 +64,7 @@ class Enseignant extends \yii\db\ActiveRecord
             'matricule' => 'Matricule',
         ];
     }
+<<<<<<< HEAD
 
     /**
      * @return \yii\db\ActiveQuery
@@ -80,4 +89,6 @@ class Enseignant extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Seance::className(), ['id_ens' => 'cin']);
     }
+=======
+>>>>>>> a53c17914c92d9e22e0b831cad0d057ae11da966
 }

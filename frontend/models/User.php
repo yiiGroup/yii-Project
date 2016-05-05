@@ -1,6 +1,10 @@
 <?php
 
+<<<<<<< HEAD
 namespace app\models;
+=======
+namespace frontend\models;
+>>>>>>> a53c17914c92d9e22e0b831cad0d057ae11da966
 
 use Yii;
 
@@ -42,7 +46,11 @@ class User extends \yii\db\ActiveRecord
             [['auth_key'], 'string', 'max' => 32],
             [['image'], 'string', 'max' => 100],
             [['role'], 'string', 'max' => 30],
+<<<<<<< HEAD
             [['matricule'], 'string', 'max' => 10],
+=======
+            [['matricule'], 'string', 'max' => 20],
+>>>>>>> a53c17914c92d9e22e0b831cad0d057ae11da966
             [['username'], 'unique'],
             [['email'], 'unique'],
             [['password_reset_token'], 'unique']

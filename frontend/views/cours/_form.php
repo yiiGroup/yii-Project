@@ -14,7 +14,13 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'texte')->textInput(['maxlength' => true]) ?>
 
+<<<<<<< HEAD
     <?= $form->field($model, 'id_ens')->textInput(['maxlength' => true]) ?>
+=======
+    <?= $form->field($model, 'id_att')->textInput() ?>
+
+    <?= $form->field($model, 'id_ens')->textInput() ?>
+>>>>>>> a53c17914c92d9e22e0b831cad0d057ae11da966
 
     <?= $form->field($model, 'id_g')->textInput() ?>
 

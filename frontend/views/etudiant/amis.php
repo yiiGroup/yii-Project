@@ -59,9 +59,15 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'firstname',
             'lastname',
+<<<<<<< HEAD
            // 'adress',
            // 'num_tel',
            // 'cin',
+=======
+            // 'adress',
+            // 'num_tel',
+            // 'cin',
+>>>>>>> a53c17914c92d9e22e0b831cad0d057ae11da966
             // 'matricule',
 
             //['class' => 'yii\grid\ActionColumn'],

@@ -19,6 +19,11 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'texte') ?>
 
+<<<<<<< HEAD
+=======
+    <?= $form->field($model, 'id_att') ?>
+
+>>>>>>> a53c17914c92d9e22e0b831cad0d057ae11da966
     <?= $form->field($model, 'id_ens') ?>
 
     <?= $form->field($model, 'id_g') ?>

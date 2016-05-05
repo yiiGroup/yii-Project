@@ -5,7 +5,10 @@ namespace frontend\controllers;
 use Yii;
 use frontend\models\Cours;
 use frontend\models\CoursSearch;
+<<<<<<< HEAD
 use frontend\models\CoursEtudiant;
+=======
+>>>>>>> a53c17914c92d9e22e0b831cad0d057ae11da966
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -31,7 +34,10 @@ class CoursController extends Controller
      * Lists all Cours models.
      * @return mixed
      */
+<<<<<<< HEAD
     //coursEtudiant
+=======
+>>>>>>> a53c17914c92d9e22e0b831cad0d057ae11da966
     public function actionIndex()
     {
         $searchModel = new CoursSearch();
@@ -42,6 +48,7 @@ class CoursController extends Controller
             'dataProvider' => $dataProvider,
         ]);
     }
+<<<<<<< HEAD
     public function actionEtudiant()
     {
         $searchModel = new CoursEtudiant();
@@ -52,6 +59,8 @@ class CoursController extends Controller
             'dataProvider' => $dataProvider,
         ]);
     }
+=======
+>>>>>>> a53c17914c92d9e22e0b831cad0d057ae11da966
 
     /**
      * Displays a single Cours model.
@@ -131,5 +140,20 @@ class CoursController extends Controller
         }
     }
 
+<<<<<<< HEAD
+=======
+    public function actionEspaceens()
+    {
+        $searchModel = new CoursSearch();
+        $dataProvider = $searchModel->searchByTeacher(Yii::$app->user->identity->matricule);
+
+        return $this->render('espaceens', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+
+           }
+
+>>>>>>> a53c17914c92d9e22e0b831cad0d057ae11da966
 
 }

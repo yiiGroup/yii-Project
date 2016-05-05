@@ -4,6 +4,7 @@ namespace frontend\controllers;
 
 use Yii;
 use frontend\models\Etudiant;
+<<<<<<< HEAD
 use frontend\models\Cours;
 use frontend\models\EtudiantSearch;
 use frontend\models\EnseignantSearch;
@@ -13,6 +14,15 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
+=======
+use frontend\models\EtudiantSearch;
+use yii\web\Controller;
+use yii\web\NotFoundHttpException;
+use yii\filters\VerbFilter;
+use frontend\models\EtudiantAmis;
+use frontend\models\CoursEtudiant;
+use frontend\models\EnseignantSearch;
+>>>>>>> a53c17914c92d9e22e0b831cad0d057ae11da966
 /**
  * EtudiantController implements the CRUD actions for Etudiant model.
  */
@@ -42,14 +52,21 @@ class EtudiantController extends Controller
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+<<<<<<< HEAD
 
+=======
+>>>>>>> a53c17914c92d9e22e0b831cad0d057ae11da966
         ]);
     }
 
     public function actionAmis()
     {
         $searchModel = new EtudiantAmis();
+<<<<<<< HEAD
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+=======
+        $dataProvider = $searchModel->search( Yii::$app->user->identity->matricule);
+>>>>>>> a53c17914c92d9e22e0b831cad0d057ae11da966
         $searchModelCours = new CoursEtudiant();
         $dataProviderCours = $searchModelCours->search(Yii::$app->request->queryParams);
         $searchModelEns = new EnseignantSearch();
@@ -86,7 +103,11 @@ class EtudiantController extends Controller
         $model = new Etudiant();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+<<<<<<< HEAD
             return $this->redirect(['view', 'id' => $model->cin]);
+=======
+            return $this->redirect(['view', 'id' => $model->ni]);
+>>>>>>> a53c17914c92d9e22e0b831cad0d057ae11da966
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -105,7 +126,11 @@ class EtudiantController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+<<<<<<< HEAD
             return $this->redirect(['view', 'id' => $model->cin]);
+=======
+            return $this->redirect(['view', 'id' => $model->ni]);
+>>>>>>> a53c17914c92d9e22e0b831cad0d057ae11da966
         } else {
             return $this->render('update', [
                 'model' => $model,

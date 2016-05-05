@@ -18,7 +18,11 @@ class EtudiantSearch extends Etudiant
     public function rules()
     {
         return [
+<<<<<<< HEAD
             [['cin', 'firstname', 'lastname', 'adresse', 'ni'], 'safe'],
+=======
+            [['cin', 'firstname', 'lastname', 'adress', 'ni'], 'safe'],
+>>>>>>> a53c17914c92d9e22e0b831cad0d057ae11da966
             [['num_tel'], 'integer'],
         ];
     }
@@ -62,7 +66,11 @@ class EtudiantSearch extends Etudiant
         $query->andFilterWhere(['like', 'cin', $this->cin])
             ->andFilterWhere(['like', 'firstname', $this->firstname])
             ->andFilterWhere(['like', 'lastname', $this->lastname])
+<<<<<<< HEAD
             ->andFilterWhere(['like', 'adresse', $this->adresse])
+=======
+            ->andFilterWhere(['like', 'adress', $this->adress])
+>>>>>>> a53c17914c92d9e22e0b831cad0d057ae11da966
             ->andFilterWhere(['like', 'ni', $this->ni]);
 
         return $dataProvider;

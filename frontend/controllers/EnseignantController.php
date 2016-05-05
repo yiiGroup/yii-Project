@@ -40,6 +40,7 @@ class EnseignantController extends Controller
             'dataProvider' => $dataProvider,
         ]);
     }
+<<<<<<< HEAD
     public function actionEtudiant()
     {
         $searchModel = new EnseignantSearch();
@@ -50,6 +51,8 @@ class EnseignantController extends Controller
             'dataProvider' => $dataProvider,
         ]);
     }
+=======
+>>>>>>> a53c17914c92d9e22e0b831cad0d057ae11da966
 
     /**
      * Displays a single Enseignant model.
@@ -63,6 +66,12 @@ class EnseignantController extends Controller
         ]);
     }
 
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> a53c17914c92d9e22e0b831cad0d057ae11da966
     /**
      * Creates a new Enseignant model.
      * If creation is successful, the browser will be redirected to the 'view' page.
@@ -73,7 +82,11 @@ class EnseignantController extends Controller
         $model = new Enseignant();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+<<<<<<< HEAD
             return $this->redirect(['view', 'id' => $model->cin]);
+=======
+            return $this->redirect(['view', 'id' => $model->matricule]);
+>>>>>>> a53c17914c92d9e22e0b831cad0d057ae11da966
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -92,7 +105,11 @@ class EnseignantController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+<<<<<<< HEAD
             return $this->redirect(['view', 'id' => $model->cin]);
+=======
+            return $this->redirect(['profil', 'id' => $model->matricule]);
+>>>>>>> a53c17914c92d9e22e0b831cad0d057ae11da966
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -128,4 +145,10 @@ class EnseignantController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> a53c17914c92d9e22e0b831cad0d057ae11da966
 }

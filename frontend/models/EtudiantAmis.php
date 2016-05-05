@@ -45,9 +45,14 @@ class EtudiantAmis extends Etudiant
 
 
         $etud = new ListInscEtudSearch();
+<<<<<<< HEAD
         $parm = Yii::$app->user->identity->matricule;
         $data = $etud->search2($parm);
 
+=======
+
+        $data = $etud->search2($parm);
+>>>>>>> a53c17914c92d9e22e0b831cad0d057ae11da966
 
 
         $dataProvider = new SqlDataProvider([

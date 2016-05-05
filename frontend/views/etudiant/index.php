@@ -28,7 +28,11 @@ $this->params['breadcrumbs'][] = $this->title;
             'cin',
             'firstname',
             'lastname',
+<<<<<<< HEAD
             'adresse',
+=======
+            'adress',
+>>>>>>> a53c17914c92d9e22e0b831cad0d057ae11da966
             'num_tel',
             // 'ni',
 

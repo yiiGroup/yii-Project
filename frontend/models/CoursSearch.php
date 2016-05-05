@@ -6,6 +6,11 @@ use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use frontend\models\Cours;
+<<<<<<< HEAD
+=======
+use yii\data\SqlDataProvider;
+
+>>>>>>> a53c17914c92d9e22e0b831cad0d057ae11da966
 
 /**
  * CoursSearch represents the model behind the search form about `frontend\models\Cours`.
@@ -18,8 +23,13 @@ class CoursSearch extends Cours
     public function rules()
     {
         return [
+<<<<<<< HEAD
             [['id', 'id_g'], 'integer'],
             [['texte', 'id_ens'], 'safe'],
+=======
+            [['id', 'id_att', 'id_ens', 'id_g'], 'integer'],
+            [['texte'], 'safe'],
+>>>>>>> a53c17914c92d9e22e0b831cad0d057ae11da966
         ];
     }
 
@@ -41,8 +51,11 @@ class CoursSearch extends Cours
      */
     public function search($params)
     {
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> a53c17914c92d9e22e0b831cad0d057ae11da966
         $query = Cours::find();
 
         $dataProvider = new ActiveDataProvider([
@@ -59,6 +72,7 @@ class CoursSearch extends Cours
 
         $query->andFilterWhere([
             'id' => $this->id,
+<<<<<<< HEAD
             'id_g' => $this->id_g,
         ]);
 
@@ -96,6 +110,34 @@ class CoursSearch extends Cours
         return $dataProvider;
     }
      * */
+=======
+            'id_att' => $this->id_att,
+            'id_ens' => $this->id_ens,
+            'id_g' => $this->id_g,
+        ]);
+
+        $query->andFilterWhere(['like', 'texte', $this->texte]);
+
+        return $dataProvider;
+    }
+
+    public function searchByTeacher($params)
+    {
+        $dataProvider = new SqlDataProvider([
+            'sql' =>'SELECT c . texte ,g . designation  as designation
+FROM `cours` c, Groupe g, attatechments a
+WHERE c.id_g = g.id
+AND c.id_att = a.id
+And c.id_ens=:param',
+
+            'params' => [':param'=>$params],
+        ]);
+
+
+
+        return $dataProvider;
+    }
+>>>>>>> a53c17914c92d9e22e0b831cad0d057ae11da966
 
 
 }

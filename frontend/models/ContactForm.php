@@ -49,6 +49,7 @@ class ContactForm extends Model
      */
     public function sendEmail($email)
     {
+<<<<<<< HEAD
         /*$form = new Accounts() ;
         $form->username=$this->name;
         $form->email=$this->email;
@@ -56,6 +57,9 @@ class ContactForm extends Model
         $form->save();*/
 
        return Yii::$app->mailer->compose()
+=======
+        return Yii::$app->mailer->compose()
+>>>>>>> a53c17914c92d9e22e0b831cad0d057ae11da966
             ->setTo($email)
             ->setFrom([$this->email => $this->name])
             ->setSubject($this->subject)

@@ -5,8 +5,13 @@ namespace frontend\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
+<<<<<<< HEAD
 use frontend\models\Enseignant;
 use \yii\data\SqlDataProvider ;
+=======
+use frontend\models\Enseignant;use yii\data\SqlDataProvider;
+
+>>>>>>> a53c17914c92d9e22e0b831cad0d057ae11da966
 
 /**
  * EnseignantSearch represents the model behind the search form about `frontend\models\Enseignant`.
@@ -39,6 +44,60 @@ class EnseignantSearch extends Enseignant
      *
      * @return ActiveDataProvider
      */
+<<<<<<< HEAD
+=======
+    public function search($params)
+    {
+        $query = Enseignant::find();
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+
+        $this->load($params);
+
+        if (!$this->validate()) {
+            // uncomment the following line if you do not want to return any records when validation fails
+            // $query->where('0=1');
+            return $dataProvider;
+        }
+
+        $query->andFilterWhere(['like', 'firstname', $this->firstname])
+            ->andFilterWhere(['like', 'lastname', $this->lastname])
+            ->andFilterWhere(['like', 'adress', $this->adress])
+            ->andFilterWhere(['like', 'num_tel', $this->num_tel])
+            ->andFilterWhere(['like', 'cin', $this->cin])
+            ->andFilterWhere(['like', 'matricule', $this->matricule]);
+
+        return $dataProvider;
+    }
+
+    public function searchParMatricule($params)
+    {
+        $query = Enseignant::find();
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+
+        $this->load($params);
+
+        if (!$this->validate()) {
+            // uncomment the following line if you do not want to return any records when validation fails
+            // $query->where('0=1');
+            return $dataProvider;
+        }
+
+        $query->andFilterWhere(['like', 'firstname', $this->firstname])
+            ->andFilterWhere(['like', 'lastname', $this->lastname])
+            ->andFilterWhere(['like', 'adress', $this->adress])
+            ->andFilterWhere(['like', 'num_tel', $this->num_tel])
+            ->andFilterWhere(['like', 'cin', $this->cin])
+            ->andFilterWhere(['like', 'matricule', $this->matricule]);
+
+        return $dataProvider;
+    }
+>>>>>>> a53c17914c92d9e22e0b831cad0d057ae11da966
     public function search2($params)
     {
         $query = Enseignant::find();
@@ -79,6 +138,7 @@ AND u.matricule = :param
 
         return $dataProvider;
     }
+<<<<<<< HEAD
     public function search($params)
     {
         $query = Enseignant::find();
@@ -105,3 +165,9 @@ AND u.matricule = :param
         return $dataProvider;
     }
 }
+=======
+
+
+
+    }
+>>>>>>> a53c17914c92d9e22e0b831cad0d057ae11da966

@@ -21,6 +21,10 @@ class AppAsset extends AssetBundle
         'css/site.css',
     ];
     public $js = [
+<<<<<<< HEAD
+=======
+        'js/popUp.js',
+>>>>>>> a53c17914c92d9e22e0b831cad0d057ae11da966
     ];
     public $depends = [
         'yii\web\YiiAsset',

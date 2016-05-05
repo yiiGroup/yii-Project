@@ -5,7 +5,11 @@ return [
             'class' => 'yii\db\Connection',
             'dsn' => 'mysql:host=localhost;dbname=yii2advanced',
             'username' => 'root',
+<<<<<<< HEAD
             'password' => 'brinis',
+=======
+            'password' => '',
+>>>>>>> a53c17914c92d9e22e0b831cad0d057ae11da966
             'charset' => 'utf8',
         ],
         'mailer' => [

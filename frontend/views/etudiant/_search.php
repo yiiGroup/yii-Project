@@ -21,7 +21,11 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'lastname') ?>
 
+<<<<<<< HEAD
     <?= $form->field($model, 'adresse') ?>
+=======
+    <?= $form->field($model, 'adress') ?>
+>>>>>>> a53c17914c92d9e22e0b831cad0d057ae11da966
 
     <?= $form->field($model, 'num_tel') ?>
 

@@ -18,7 +18,11 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'lastname')->textInput(['maxlength' => true]) ?>
 
+<<<<<<< HEAD
     <?= $form->field($model, 'adresse')->textInput(['maxlength' => true]) ?>
+=======
+    <?= $form->field($model, 'adress')->textInput(['maxlength' => true]) ?>
+>>>>>>> a53c17914c92d9e22e0b831cad0d057ae11da966
 
     <?= $form->field($model, 'num_tel')->textInput() ?>
 

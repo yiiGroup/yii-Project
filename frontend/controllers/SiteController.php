@@ -1,9 +1,18 @@
 <?php
 namespace frontend\controllers;
 
+<<<<<<< HEAD
 use Yii;
 use common\models\LoginForm;
 use frontend\models\Accounts;
+=======
+use frontend\models\EventSearch;
+use frontend\models\NewsSearch;
+use frontend\models\User;
+use frontend\models\UserSearch;
+use Yii;
+use common\models\LoginForm;
+>>>>>>> a53c17914c92d9e22e0b831cad0d057ae11da966
 use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
@@ -13,6 +22,11 @@ use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+<<<<<<< HEAD
+=======
+use frontend\models\Enseignant;
+use yii\web\NotFoundHttpException;
+>>>>>>> a53c17914c92d9e22e0b831cad0d057ae11da966
 
 /**
  * Site controller
@@ -66,14 +80,45 @@ class SiteController extends Controller
         ];
     }
 
+<<<<<<< HEAD
+=======
+    protected function findModel1($id)
+    {
+        if (($model = Ens_mat::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+
+>>>>>>> a53c17914c92d9e22e0b831cad0d057ae11da966
     /**
      * Displays homepage.
      *
      * @return mixed
      */
+<<<<<<< HEAD
     public function actionIndex()
     {
         return $this->render('index');
+=======
+
+
+
+
+    public function actionIndex()
+    {
+       $e=new EventSearch();
+       $dataProvider= $e->searchPerMonth();
+$n=new NewsSearch();
+        $dp=$n->searchAll();
+
+return $this->render('index', [
+    'dataProvider' => $dataProvider,
+    'dp' => $dp
+]);
+
+>>>>>>> a53c17914c92d9e22e0b831cad0d057ae11da966
     }
 
     /**
@@ -143,6 +188,53 @@ class SiteController extends Controller
     }
 
 
+<<<<<<< HEAD
+=======
+    protected function findModel($id)
+    {
+        if (($model = Enseignant::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+    /**
+     * Signs user up.
+     *
+     * @return mixed
+     */
+
+
+
+
+
+
+    public function actionSignup()
+    {
+        $model = new SignupForm();
+        if ($model->load(Yii::$app->request->post())) {
+            if ($user = $model->signup()) {
+                if (Yii::$app->getUser()->login($user)) {
+                    return $this->goHome();
+                }
+            }
+        }
+
+        return $this->render('signup', [
+            'model' => $model,
+        ]);
+    }
+>>>>>>> a53c17914c92d9e22e0b831cad0d057ae11da966
 
     /**
      * Requests password reset.
@@ -193,6 +285,7 @@ class SiteController extends Controller
         ]);
     }
 
+<<<<<<< HEAD
     /**
      * Signs user up.
      *
@@ -248,5 +341,7 @@ class SiteController extends Controller
         ]);
     }
 
+=======
+>>>>>>> a53c17914c92d9e22e0b831cad0d057ae11da966
 
 }

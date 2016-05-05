@@ -10,12 +10,15 @@ use Yii;
  * @property integer $id
  * @property string $designation
  * @property integer $id_s
+<<<<<<< HEAD
  *
  * @property Specialite $idS
  * @property Cours[] $cours
  * @property EnsMat[] $ensMats
  * @property ListInscEtud[] $listInscEtuds
  * @property Seance[] $seances
+=======
+>>>>>>> a53c17914c92d9e22e0b831cad0d057ae11da966
  */
 class Groupe extends \yii\db\ActiveRecord
 {
@@ -50,6 +53,7 @@ class Groupe extends \yii\db\ActiveRecord
             'id_s' => 'Id S',
         ];
     }
+<<<<<<< HEAD
 
     /**
      * @return \yii\db\ActiveQuery
@@ -90,4 +94,6 @@ class Groupe extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Seance::className(), ['id_g' => 'id']);
     }
+=======
+>>>>>>> a53c17914c92d9e22e0b831cad0d057ae11da966
 }
