@@ -53,10 +53,11 @@ class EventController extends Controller
      */
     public function actionView($id)
     {
+        $model =$this->findModel($id);
         $dataProvider = new ArrayDataProvider([
             'allModels' =>
                 Place::find()
-                    ->where(['id' => $id])
+                    ->where(['id' => $model->event_place])
                     ->All()
         ]);
         return $this->render('view', [
@@ -132,11 +133,11 @@ class EventController extends Controller
         }
     }
 
-    public function actionCreateEv()
+    /*public function actionCreateEv()
     {
         $id = UserSetting::initialize(Yii::$app->user->getId());
         return $this->redirect(['update', 'id' => $id]);
 
-    }
+    }*/
 
 }

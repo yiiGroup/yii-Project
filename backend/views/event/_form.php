@@ -13,20 +13,27 @@ use yii\jui\DatePicker;
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'club_id')->textInput() ?>
+    <?= $form->field($model, 'club_id')
+        ->dropDownList(
+            \yii\helpers\ArrayHelper::map(\backend\models\Club::find()->all(),'id','name'),
+            ['prompt'=>'Choose your club?']
+        )->label('Club') ?>
 
     <?= $form->field($model, 'event_type')
         ->dropDownList(
             $model->getEventTypeOptions(),
             ['prompt'=>'What type of event is this?']
-        )->label('Type of Place') ?>
+        )->label('Type of Event') ?>
 
     <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
 
     <?= $form->field($model,'date')->widget(DatePicker::className(),['dateFormat' => 'yyyy-MM-dd']) ?>
 
-    <?= $form->field($model, 'event_place')->textInput() ?>
+    <?= $form->field($model, 'event_place')
+        ->dropDownList(
+            \yii\helpers\ArrayHelper::map(\backend\models\Place::find()->all(),'id','name'),
+            ['prompt'=>'Choose your event place?']
+        )->label('Place') ?>
 
 
     <div class="form-group">

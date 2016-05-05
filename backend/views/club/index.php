@@ -15,9 +15,20 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <p>
-        <?= Html::a('Create Club', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+    <div class="form-group">
+        <?= Html::button('Create a new CLub',['value'=>\yii\helpers\Url::to('index.php?r=club%2Fcreate'),'class'=>'btn btn-success','id'=>'modalButton']) ?>
+    </div>
+
+    <?php
+    \yii\bootstrap\Modal::begin([
+        'header'=>'<h4>Places</h4>',
+        'id'=>'modal',
+        'size'=>'modal-lg',
+    ]);
+    echo "<div id='modalContent'></div>";
+
+    \yii\bootstrap\Modal::end();
+    ?>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
